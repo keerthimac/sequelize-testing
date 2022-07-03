@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { register } from "../features/authSlice";
 import { reset } from "../features/authSlice";
+import Spinner from "../components/Spinner";
 
 function Register() {
   const [fromData, setFromData] = useState({
@@ -13,8 +15,11 @@ function Register() {
     confirmPassword: "",
   });
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { name, email, password, confirmPassword } = fromData;
-  const { user, isError, isLoading, message } = useSelector(
+  const { user, isError, isLoading, isSuccess, message } = useSelector(
     (state) => state.auth
   );
 
@@ -22,10 +27,14 @@ function Register() {
     if (isError) {
       toast.error(message);
     }
+    if (isLoading) {
+      <Spinner />;
+    }
+    if (isSuccess || user) {
+      navigate("/");
+    }
     dispatch(reset());
-  }, [isError]);
-
-  const dispatch = useDispatch();
+  }, [isError, isSuccess, isLoading, user, message, navigate, dispatch]);
 
   const onChange = (e) => {
     setFromData({

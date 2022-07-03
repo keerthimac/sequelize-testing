@@ -1,5 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
+import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { login } from "../features/authSlice";
+import { reset } from "../features/authSlice";
+import Spinner from "../components/Spinner";
 
 function Login() {
   const [fromData, setFromData] = useState({
@@ -7,7 +13,26 @@ function Login() {
     password: "",
   });
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { email, password } = fromData;
+  const { user, isError, isLoading, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    if (isLoading) {
+      <Spinner />;
+    }
+    if (isSuccess || user) {
+      navigate("/");
+    }
+    dispatch(reset());
+  }, [isError, isLoading, isSuccess, user, dispatch, navigate]);
 
   const onChange = (e) => {
     setFromData({
@@ -18,7 +43,7 @@ function Login() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(fromData);
+    dispatch(login(fromData));
   };
 
   return (
