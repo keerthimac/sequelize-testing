@@ -18,16 +18,19 @@ const connectDB = async () => {
   }
 };
 
+//connect do database
+connectDB();
+
+//initiate db object
 const db = {};
 
+//add sequelize to db object
 db.sequelize = sequelize;
-// console.log(db.sequelize); //testing
 
 // making user model to db object
 db.user = require("./userModel")(sequelize, DataTypes);
 
-//sync tables
-
+//sync tables (optional)
 const syncTables = async () => {
   try {
     await db.sequelize.sync({ alter: true });
@@ -36,8 +39,7 @@ const syncTables = async () => {
     console.log(`Error:${error.message}`.red.underline.bold);
   }
 };
-
-connectDB();
+// //sync tables
 // syncTables();
 
 module.exports = db;
