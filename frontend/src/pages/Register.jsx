@@ -3,8 +3,8 @@ import { FaUser } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { register } from "../features/authSlice";
-import { reset } from "../features/authSlice";
+import { register } from "../features/auth/authSlice";
+import { reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
 
 function Register() {
