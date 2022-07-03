@@ -1,5 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
+import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { register } from "../features/authSlice";
+import { reset } from "../features/authSlice";
 
 function Register() {
   const [fromData, setFromData] = useState({
@@ -10,12 +14,38 @@ function Register() {
   });
 
   const { name, email, password, confirmPassword } = fromData;
+  const { user, isError, isLoading, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    dispatch(reset());
+  }, [isError]);
+
+  const dispatch = useDispatch();
 
   const onChange = (e) => {
     setFromData({
       ...fromData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      toast.error("Password and Confirm Password do not match");
+    } else {
+      const userData = {
+        name,
+        email,
+        password,
+      };
+      dispatch(register(userData));
+    }
   };
 
   return (
@@ -27,7 +57,7 @@ function Register() {
         <p>Please create an account</p>
       </section>
       <section className='form'>
-        <form>
+        <form onSubmit={onSubmit}>
           <div className='form-group'>
             <input
               type='text'
