@@ -1,37 +1,75 @@
-const Sequelize = require("sequelize");
-const db = require("../config/database").database;
-const { DataTypes, Op } = require("sequelize");
+// const sequelize = require("sequelize");
+// const Sequelize = require("sequelize");
+// const db = require("../config/database").database;
+// const { DataTypes, Op } = require("sequelize");
 
-const User = db.define(
-  "user",
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
+//new Code
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define(
+    "user",
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      isAdmin: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    isAdmin: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-    },
-  },
-  {
-    freezeTableName: true,
-    timestamps: false,
-  }
-);
+    {
+      freezeTableName: true,
+      timestamps: false,
+    }
+  );
+  return User;
+};
+//new code ends here
 
-module.exports = User;
+// const User = db.define(
+//   "user",
+//   {
+//     id: {
+//       type: DataTypes.INTEGER,
+//       primaryKey: true,
+//       autoIncrement: true,
+//     },
+//     name: {
+//       type: DataTypes.STRING,
+//       allowNull: false,
+//     },
+//     email: {
+//       type: DataTypes.STRING,
+//       allowNull: false,
+//     },
+//     password: {
+//       type: DataTypes.STRING,
+//       allowNull: false,
+//     },
+//     isAdmin: {
+//       type: DataTypes.BOOLEAN,
+//       allowNull: false,
+//       defaultValue: false,
+//     },
+//   },
+//   {
+//     freezeTableName: true,
+//     timestamps: false,
+//   }
+// );
+
+// module.exports = User;

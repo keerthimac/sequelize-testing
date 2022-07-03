@@ -1,7 +1,15 @@
+// const asyncHandler = require("express-async-handler");
+// const bcrypt = require("bcryptjs");
+// const jwtGenerator = require("../utils/jwtGenerator");
+// const User = require("../models/userModel");
+
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 const jwtGenerator = require("../utils/jwtGenerator");
-const User = require("../models/userModel");
+const db = require("../models");
+
+// create main Model
+const User = db.user;
 
 // @desc Register a new user
 // @route POST/api/users
@@ -9,8 +17,8 @@ const User = require("../models/userModel");
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
-  //Initiate table
-  await User.sync({ alter: true });
+  // //Initiate table
+  // await User.sync({ alter: true });
 
   //Validation
   if (!name || !email || !password) {
