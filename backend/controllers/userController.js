@@ -94,7 +94,7 @@ const loginUser = asyncHandler(async (req, res) => {
 // @access Private
 const getMe = asyncHandler(async (req, res) => {
   try {
-    const { name, email, id } = req.user[0].dataValues;
+    const { name, email, id } = req.user;
     const user = {
       id: id,
       email: email,
