@@ -41,5 +41,11 @@ const syncTables = async () => {
 connectDB();
 // syncTables(); // optional -  When create new table
 
+//define Relationships
+//one to many relationship between user and tickets
+
+db.user.hasMany(db.ticket);
+db.ticket.belongsTo(db.user);
+
 //export db object
 module.exports = db;
