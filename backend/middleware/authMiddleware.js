@@ -19,18 +19,14 @@ const protect = asyncHandler(async (req, res, next) => {
       //04 Verify Token
       const verified = jwt.verify(token, process.env.JWT_SECRET);
       //05 Get user from token via server
-      req.user = await User.findOne(
-        // {
-        //   attributes: { exclude: ["password"] },
-        // },
-        {
-          where: {
-            id: verified.id,
-          },
-        }
-      );
-      const { id, name } = req.user;
-      console.log(id, name);
+      req.user = await User.findOne({
+        attributes: { exclude: ["password", "isAdmin"] },
+        where: {
+          id: verified.id,
+        },
+      });
+      // const { id, name } = req.user;
+      // console.log(id, name);
       //06 next function
       next();
     } catch (error) {
