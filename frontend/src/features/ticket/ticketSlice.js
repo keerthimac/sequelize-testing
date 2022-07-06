@@ -44,7 +44,7 @@ export const ticketSlice = createSlice({
     builder.addCase(createTicket.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(createTicket.fulfilled, (state, action) => {
+    builder.addCase(createTicket.fulfilled, (state) => {
       state.isLoading = false;
       state.isSuccess = true;
       state.message = "Ticket Submitted Successfully";
