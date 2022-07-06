@@ -32,7 +32,7 @@ function Login() {
       navigate("/");
     }
     dispatch(reset());
-  }, [isError, isLoading, isSuccess, user, dispatch, navigate]);
+  }, [isError, isLoading, isSuccess, user, message, dispatch, navigate]);
 
   const onChange = (e) => {
     setFromData({
