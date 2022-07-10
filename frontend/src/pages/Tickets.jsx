@@ -12,7 +12,7 @@ function Tickets() {
     (state) => state.ticket
   );
 
-  console.log(tickets);
+  // console.log(tickets);
 
   const dispatch = useDispatch();
 
