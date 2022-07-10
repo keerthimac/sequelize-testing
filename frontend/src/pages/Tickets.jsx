@@ -43,9 +43,9 @@ function Tickets() {
           <div></div>
         </div>
         {/* <TicketItem key={tickets[1].id} ticket={tickets[1]} />; */}
-        {tickets.map((ticket) => {
-          <TicketItem key={ticket.id} ticket={ticket} />;
-        })}
+        {tickets.map((ticket) => (
+          <TicketItem key={ticket.id} ticket={ticket} />
+        ))}
       </div>
     </>
   );

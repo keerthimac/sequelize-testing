@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function TicketItem(ticket) {
+function TicketItem({ ticket }) {
   console.log(ticket);
   return (
     <div className='ticket'>
