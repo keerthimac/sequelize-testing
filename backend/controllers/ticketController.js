@@ -16,7 +16,7 @@ const getTickets = asyncHandler(async (req, res) => {
   }
 
   const tickets = await Ticket.findAll({
-    attributes: ["product", "description"],
+    attributes: ["id", "product", "description", "createdAt"],
     include: {
       model: User,
       where: { Id: id },
