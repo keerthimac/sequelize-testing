@@ -50,7 +50,7 @@ const getTicket = asyncHandler(async (req, res) => {
   const ticketId = req.params.id;
 
   const ticket = await Ticket.findOne({
-    attributes: ["product", "description"],
+    attributes: ["id", "product", "description", "status", "createdAt"],
     include: {
       model: User,
       where: { id: id },
