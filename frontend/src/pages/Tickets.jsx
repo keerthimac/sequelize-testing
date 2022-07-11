@@ -18,7 +18,6 @@ function Tickets() {
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success(message);
       dispatch(reset());
     }
   }, [dispatch, isSuccess]);
@@ -29,6 +28,10 @@ function Tickets() {
 
   if (isLoading) {
     <Spinner />;
+  }
+
+  if (isError) {
+    toast.error(message);
   }
 
   return (
